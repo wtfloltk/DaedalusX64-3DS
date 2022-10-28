@@ -504,7 +504,7 @@ int main(int argc, char* argv[])
             failed = false;
             printf("\x1b[32;1mDone\x1b[0m: No further steps needed!\n");
             free(bin);
-        //} while (0);
+        } while (0);
 
         //if (rsrc && failed)
         //    printf("\x1b[31;1mFailed\x1b[0m: Unknown error. Try again.");
