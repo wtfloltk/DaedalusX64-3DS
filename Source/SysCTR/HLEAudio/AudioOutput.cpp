@@ -145,7 +145,7 @@ void AudioOutput::AddBuffer( u8 *start, u32 length )
 	u32 num_samples = length / sizeof( Sample );
     u32 output_freq = 44100;
 
-    output_freq = (100000*(SRomPreferences().Clock/ 44100));
+    output_freq = /*(100000*(SRomPreferences().Clock*/ 44100/*))*/;
 
 
 	/*if (gAudioRateMatch)
