@@ -273,6 +273,14 @@ bool IRomSettingsDB::OpenSettingsFile( const char * filename )
 		{
 			settings.SpeedSyncEnabled = atoi( p_property->GetValue() );
 		}
+		if( p_section->FindProperty( "Clock", &p_property ) )
+		{
+			settings.Clock = atoi( p_property->GetValue() );
+		}
+		//		if( p_section->FindProperty( "Clock", &p_property ) )
+		//{
+	//		settings.Clock = p_property->GetBooleanValue( true );
+	//	}
 		if( p_section->FindProperty( "DynarecSupported", &p_property ) )
 		{
 			settings.DynarecSupported = p_property->GetBooleanValue( true );
@@ -428,8 +436,10 @@ void IRomSettingsDB::OutputSectionDetails( const RomID & id, const RomSettings &
 	if( !settings.Comment.empty() )				fprintf(fh, "Comment=%s\n", settings.Comment.c_str());
 	if( !settings.Info.empty() )				fprintf(fh, "Info=%s\n", settings.Info.c_str());
 	if( !settings.Preview.empty() )				fprintf(fh, "Preview=%s\n", settings.Preview.c_str());
-	if( !settings.PatchesEnabled )				fprintf(fh, "PatchesEnabled=no\n");
-	if( !settings.SpeedSyncEnabled )			fprintf(fh, "SpeedSyncEnabled=%d\n", settings.SpeedSyncEnabled);
+
+    if( !settings.PatchesEnabled )				fprintf(fh, "PatchesEnabled=no\n");
+    if( !settings.SpeedSyncEnabled )			fprintf(fh, "SpeedSyncEnabled=%d\n", settings.SpeedSyncEnabled);
+    if( !settings.Clock )			fprintf(fh, "Clock=%d\n", settings.Clock);
 	if( !settings.DynarecSupported )			fprintf(fh, "DynarecSupported=no\n");
 	if( !settings.DynarecLoopOptimisation )		fprintf(fh, "DynarecLoopOptimisation=yes\n");
 	if( !settings.DynarecDoublesOptimisation )	fprintf(fh, "DynarecDoublesOptimisation=yes\n");
@@ -492,6 +502,7 @@ RomSettings::RomSettings()
 ,	SaveType( SAVE_TYPE_UNKNOWN )
 ,	PatchesEnabled( true )
 ,	SpeedSyncEnabled( 1 )
+,   Clock(666999666 )
 ,	DynarecSupported( true )
 ,	DynarecLoopOptimisation( false )
 ,	DynarecDoublesOptimisation( false )
@@ -519,6 +530,7 @@ void	RomSettings::Reset()
 	ExpansionPakUsage = PAK_STATUS_UNKNOWN;
 	SaveType = SAVE_TYPE_UNKNOWN;
 	PatchesEnabled = true;
+    Clock = 666999666;
 	SpeedSyncEnabled = 0;
 	DynarecSupported = true;
 	DynarecLoopOptimisation = false;

@@ -60,6 +60,7 @@ struct RomSettings
 
 	bool				PatchesEnabled;
 	u32					SpeedSyncEnabled;
+    float 				Clock;
 	bool				DynarecSupported;
 	bool				DynarecLoopOptimisation;
 	bool				DynarecDoublesOptimisation;
