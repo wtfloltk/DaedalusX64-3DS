@@ -466,12 +466,12 @@ int main(int argc, char* argv[])
     Handle rsrc;
         bool failed = true;
 
-        gfxInitDefault();
-        consoleInit(GFX_TOP, NULL);
+       // gfxInitDefault();
+       // consoleInit(GFX_TOP, NULL);
 
-        printf("\x1b[10;10HFetching DSP component...\x1b[12;10H");
+        //printf("\x1b[10;10HFetching DSP component...\x1b[12;10H");
 
-        rsrc = envGetHandle("hb:ndsp");
+        //rsrc = envGetHandle("hb:ndsp");
         //if (!rsrc)
         //{
           //  printf("\x1b[31;1mFailed\x1b[0m: Need to run using *hax 2.0+");
@@ -502,29 +502,29 @@ int main(int argc, char* argv[])
             fclose(file);
 
             failed = false;
-            printf("\x1b[32;1mDone\x1b[0m: No further steps needed!\n");
+            //printf("\x1b[32;1mDone\x1b[0m: No further steps needed!\n");
             free(bin);
         } while (0);
 
         //if (rsrc && failed)
         //    printf("\x1b[31;1mFailed\x1b[0m: Unknown error. Try again.");
 
-        printf("\x1b[28;15HPress START to exit.");
+        //printf("\x1b[28;15HPress START to exit.");
 
-        while (aptMainLoop())
-        {
-            hidScanInput();
-            u32 kDown = hidKeysDown();
+       // while (aptMainLoop())
+       // {
+       //     hidScanInput();
+       //     u32 kDown = hidKeysDown();
 
-            if (kDown & KEY_START)
-                break;
+            //if (kDown & KEY_START)
+             //   break;
 
-            gfxFlushBuffers();
-            gfxSwapBuffers();
-            gspWaitForVBlank();
-        }
+            //gfxFlushBuffers();
+           // gfxSwapBuffers();
+          //  gspWaitForVBlank();
+        //}
 
-        gfxExit();
+        //gfxExit();
 
 	char fullpath[512];
 
