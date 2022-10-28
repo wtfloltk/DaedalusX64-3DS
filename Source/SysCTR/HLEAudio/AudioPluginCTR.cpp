@@ -41,7 +41,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define RSP_AUDIO_INTR_CYCLES     1
 
-#define DEFAULT_FREQUENCY 44100	// Taken from Mupen64 : )
+#define DEFAULT_FREQUENCY ((SRomPreferences().Clock*/44100)*100000	// Taken from Mupen64 : )
 
 extern bool isN3DS;
 // FIXME: Hack!
@@ -78,7 +78,7 @@ CAudioPluginCTR::CAudioPluginCTR()
 		_runThread = true;
 
 		svcCreateEvent(&audioRequest, RESET_ONESHOT);
-		asyncThread = threadCreate(asyncProcess, 0, (8 * 1024), 0x18, 2, true);
+        asyncThread = threadCreate(asyncProcess, 0, (512 * 1024), 0x18, 2, true);
 	}
 }
 
@@ -139,7 +139,7 @@ void	CAudioPluginCTR::DacrateChanged( int SystemType )
 	u32 dacrate = Memory_AI_GetRegister(AI_DACRATE_REG);
 	u32	frequency = type / (dacrate + 1);
 
-	mAudioOutput->SetFrequency( frequency );
+    mAudioOutput->SetFrequency( frequency );
 }
 
 

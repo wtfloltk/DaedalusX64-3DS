@@ -5,14 +5,14 @@ BasicInfo:
 
 TitleInfo:
   Category                : Application
-  UniqueId                : 0xDAED3
+  UniqueId                : 0xDABC1
 
 Option:
-  UseOnSD                 : true # true if App is to be installed to SD
+  UseOnSD                 : false # true if App is to be installed to SD
   FreeProductCode         : true # Removes limitations on ProductCode
   MediaFootPadding        : false # If true CCI files are created with padding
   EnableCrypt             : false # Enables encryption for NCCH and CIA
-  EnableCompress          : true # Compresses where applicable (currently only exefs:/.code)
+  EnableCompress          : false # Compresses where applicable (currently only exefs:/.code)
   
 AccessControlInfo:
   CoreVersion                   : 2
@@ -25,33 +25,33 @@ AccessControlInfo:
   ReleaseKernelMinor            : "33" 
 
   # ExtData
-  UseExtSaveData                : false # enables ExtData       
+  UseExtSaveData                : true # enables ExtData
   #ExtSaveDataId                : 0x300 # only set this when the ID is different to the UniqueId
 
   # FS:USER Archive Access Permissions
   # Uncomment as required
   FileSystemAccess:
-   #- CategorySystemApplication
-   #- CategoryHardwareCheck
+   - CategorySystemApplication
+   - CategoryHardwareCheck
    - CategoryFileSystemTool
-   #- Debug
-   #- TwlCardBackup
-   #- TwlNandData
-   #- Boss
+   - Debug
+   - TwlCardBackup
+   - TwlNandData
+   - Boss
    - DirectSdmc
-   #- Core
-   #- CtrNandRo
-   #- CtrNandRw
-   #- CtrNandRoWrite
-   #- CategorySystemSettings
-   #- CardBoard
-   #- ExportImportIvs
-   #- DirectSdmcWrite
-   #- SwitchCleanup
-   #- SaveDataMove
-   #- Shop
-   #- Shell
-   #- CategoryHomeMenu
+   - Core
+   - CtrNandRo
+   - CtrNandRw
+   - CtrNandRoWrite
+   - CategorySystemSettings
+   - CardBoard
+   - ExportImportIvs
+   - DirectSdmcWrite
+   - SwitchCleanup
+   - SaveDataMove
+   - Shop
+   - Shell
+   - CategoryHomeMenu
 
   # Process Settings
   MemoryType                    : Application # Application/System/Base
@@ -59,16 +59,16 @@ AccessControlInfo:
   IdealProcessor                : 0
   AffinityMask                  : 1
   Priority                      : 16
-  MaxCpu                        : 0x9E # Default
+  MaxCpu                        : 0xFFFF # Default
   HandleTableSize               : 0x200
   DisableDebug                  : false
   EnableForceDebug              : false
   CanWriteSharedPage            : true
-  CanUsePrivilegedPriority      : false
+  CanUsePrivilegedPriority      : true
   CanUseNonAlphabetAndNumber    : true
   PermitMainFunctionArgument    : true
   CanShareDeviceMemory          : true
-  RunnableOnSleep               : false
+  RunnableOnSleep               : true
   SpecialMemoryArrange          : true
 
   # New3DS Exclusive Process Settings

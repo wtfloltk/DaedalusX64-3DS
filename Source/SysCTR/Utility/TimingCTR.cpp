@@ -18,7 +18,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "stdafx.h"
-#include "Utility/Timing.h"
+//#include "ROM.h"
+
+#include <stdio.h>
+
+//#include "Cheats.h"
+//#include "CPU.h"
+//#include "PIF.h"		// CController
+//#include "R4300.h"
+//#include "ROMBuffer.h"
+//#include "ROMImage.h"
+//#include "RomSettings.h"
+
+#include "Config/ConfigOptions.h"
+#include "Debug/DBGConsole.h"
+#include "Debug/DebugLog.h"
+#include "Interface/RomDB.h"
+#include "Math/MathUtil.h"
+#include "OSHLE/patch.h"			// Patch_ApplyPatches
+#include "OSHLE/ultra_os.h"		// System type
+#include "OSHLE/ultra_R4300.h"
+#include "Plugins/AudioPlugin.h"
+#include "Plugins/GraphicsPlugin.h"
+#include "Utility/CRC.h"
+#include "Utility/FramerateLimiter.h"
+#include "Utility/IO.h"
+#include "Utility/Macros.h"
+#include "Utility/Preferences.h"
+#include "Utility/ROMFile.h"
+#include "Utility/Stream.h"
+#include "Utility/Synchroniser.h"
 
 #include <3ds.h>
 
@@ -28,7 +57,7 @@ namespace NTiming {
 
 bool GetPreciseFrequency( u64 * p_freq )
 {
-	*p_freq = TICKS_PER_SEC;
+    *p_freq = SRomPreferences().Clock;
 	return true;
 }
 
@@ -41,7 +70,11 @@ bool GetPreciseTime( u64 * p_time )
 u64 ToMilliseconds( u64 ticks )
 {
 	//?
-	return (ticks * 1000 * 1000) / TICKS_PER_SEC;
+
+
+    SRomPreferences romPreferences;
+    CPreferences::Get()->GetRomPreferences(RomID() ,&romPreferences );
+    return (ticks * 1000 * 1000) / romPreferences.Clock;
 }
 
 } // NTiming

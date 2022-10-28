@@ -43,6 +43,8 @@ class AudioOutput
 	public:
 		void				FillBuffer( Sample * buffer, u32 num_samples );
 
+        static float audFreak;
+static const u32 DESIRED_OUTPUT_FREQUENCY;
 	private:
 		bool				mAudioPlaying;
 		bool				mExitAudioThread;
