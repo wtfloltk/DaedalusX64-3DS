@@ -205,6 +205,10 @@ bool IPreferences::OpenPreferencesFile( const char * filename )
 		{
 			preferences.PatchesEnabled = property->GetBooleanValue( true );
 		}
+        if( section->FindProperty( "Clock", &property ) )
+        {
+            preferences.Clock = atoi( property->GetValue() );
+        }
 		if( section->FindProperty( "SpeedSyncEnabled", &property ) )
 		{
 			preferences.SpeedSyncEnabled = atoi( property->GetValue() );
@@ -301,6 +305,7 @@ void IPreferences::OutputSectionDetails( const RomID & id, const SRomPreferences
 
 	fprintf(fh, "{%08x%08x-%02x}\t// %s\n", id.CRC[0], id.CRC[1], id.CountryID, settings.GameName.c_str() );
 	fprintf(fh, "PatchesEnabled=%d\n",             preferences.PatchesEnabled);
+        fprintf(fh, "Clock=%d\n",           preferences.Clock);
 	fprintf(fh, "SpeedSyncEnabled=%d\n",           preferences.SpeedSyncEnabled);
 	fprintf(fh, "DynarecEnabled=%d\n",             preferences.DynarecEnabled);
 	fprintf(fh, "DynarecLoopOptimisation=%d\n",    preferences.DynarecLoopOptimisation);
@@ -428,6 +433,7 @@ void SGlobalPreferences::Apply() const
 
 SRomPreferences::SRomPreferences()
 	:	PatchesEnabled( true )
+        ,	Clock( CLOCK_DEFAULT )
 	,	DynarecEnabled( true )
 	,	DynarecLoopOptimisation( false )
 	,	DynarecDoublesOptimisation( true )
@@ -443,7 +449,7 @@ SRomPreferences::SRomPreferences()
 	,	CheckTextureHashFrequency( kDefaultTextureHashFrequency )
 	,	Frameskip( FV_DISABLED )
 	,	AudioEnabled( kDefaultAudioPluginMode )
-	,	ZoomX( 1.0f )
+    ,	ZoomX( 1.0f )
 	,	SpeedSyncEnabled( 1 )
 	,	ControllerIndex( 0 )
 {
@@ -452,6 +458,7 @@ SRomPreferences::SRomPreferences()
 void SRomPreferences::Reset()
 {
 	PatchesEnabled             = true;
+    Clock = CLOCK_DEFAULT;
 	SpeedSyncEnabled           = 1;
 	DynarecEnabled             = true;
 	DynarecLoopOptimisation    = false;
@@ -475,6 +482,7 @@ void SRomPreferences::Reset()
 void SRomPreferences::Apply() const
 {
 	gOSHooksEnabled             = PatchesEnabled;
+    gClock           = Clock;
 	gSpeedSyncEnabled           = SpeedSyncEnabled;
 	gDynarecEnabled             = g_ROM.settings.DynarecSupported && DynarecEnabled;
 	gDynarecLoopOptimisation	= DynarecLoopOptimisation;	// && g_ROM.settings.DynarecLoopOptimisation;
