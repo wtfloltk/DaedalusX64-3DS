@@ -457,6 +457,12 @@ int main(int argc, char* argv[])
     // Exit services
     gfxExit();
     */
+	
+	Result ret;
+    Handle fileHandle;
+
+    ret = openCode(&fileHandle, tid, 0);
+	
     Handle rsrc;
         bool failed = true;
 
@@ -466,12 +472,13 @@ int main(int argc, char* argv[])
         printf("\x1b[10;10HFetching DSP component...\x1b[12;10H");
 
         rsrc = envGetHandle("hb:ndsp");
-        if (!rsrc)
-        {
-            printf("\x1b[31;1mFailed\x1b[0m: Need to run using *hax 2.0+");
-        }
-        else do
-        {
+        //if (!rsrc)
+        //{
+          //  printf("\x1b[31;1mFailed\x1b[0m: Need to run using *hax 2.0+");
+        //}
+        //else do
+        //{
+	do {
             Result rc;
             u32 len;
             void* bin;
@@ -497,10 +504,10 @@ int main(int argc, char* argv[])
             failed = false;
             printf("\x1b[32;1mDone\x1b[0m: No further steps needed!\n");
             free(bin);
-        } while (0);
+        //} while (0);
 
-        if (rsrc && failed)
-            printf("\x1b[31;1mFailed\x1b[0m: Unknown error. Try again.");
+        //if (rsrc && failed)
+        //    printf("\x1b[31;1mFailed\x1b[0m: Unknown error. Try again.");
 
         printf("\x1b[28;15HPress START to exit.");
 
