@@ -461,7 +461,7 @@ int main(int argc, char* argv[])
 	Result ret;
     Handle fileHandle;
 
-    ret = openCode(&fileHandle, tid, 0);
+    //ret = openCode(&fileHandle, tid, 0);
 	
     Handle rsrc;
         bool failed = true;
