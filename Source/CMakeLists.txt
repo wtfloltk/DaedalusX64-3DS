@@ -370,13 +370,13 @@ if (CTR_RELEASE)
 
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.3dsx
-		COMMAND 3dsxtool ${PROJECT_NAME}.elf ${PROJECT_NAME}.3dsx --romfs=${APP_ROMFS_DIR} --smdh=${APP_SMDH}
+		COMMAND ./3dsxtool ${PROJECT_NAME}.elf ${PROJECT_NAME}.3dsx --romfs=${APP_ROMFS_DIR} --smdh=${APP_SMDH}
 		DEPENDS ${PROJECT_NAME}.elf
 	)
 
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.cia
-		COMMAND makerom	-f cia
+		COMMAND ./makerom	-f cia
 				-target t
 				-exefslogo
 				-o ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.cia
