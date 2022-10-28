@@ -37,12 +37,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "Utility/Timing.h"
 
 #include "Core/Memory.h"
+#include "SysCTR/HLEAudio/AudioOutput.h"
 
 //#define DAEDALUS_FRAMERATE_ANALYSIS
 
 extern bool gFrameskipActive;
 
-u32		gSoundSync = 44100;
+u32		gSoundSync = 100000*(SRomPreferences().Clock / 44100);
 u32		gVISyncRate = 1500;
 bool	gTakeScreenshot = false;
 bool	gTakeScreenshotSS = false;
@@ -198,7 +199,7 @@ void CGraphicsPluginImpl::UpdateScreen()
 		{
 			const f32 inv_Fsync = 1.0f / Fsync;
 
-			gSoundSync  = (u32)(44100.0f * inv_Fsync);
+            gSoundSync  = (u32)((100000*(SRomPreferences().Clock/44100)) * inv_Fsync);
 			gVISyncRate = (u32)( 1500.0f * inv_Fsync);
 
 			if( gVISyncRate > 4000 )

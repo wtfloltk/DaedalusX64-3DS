@@ -122,26 +122,7 @@ std::string UI::DrawRomSelector()
 
 	UI::RestoreRenderState();
 	
-	if(roms.empty())
-	{
-		pglExit();
-		gfxExit();
 
-		gfxInitDefault();
-		consoleInit(GFX_BOTTOM, NULL);
-
-		printf("No ROMs found!\n\n");
-		printf("Add ROMs to sdmc:/3ds/DaedalusX64/Roms\n\n\n");
-		printf("Press START to exit\n");
-
-		while(aptMainLoop())
-		{
-			hidScanInput();
-
-			if(hidKeysDown() == KEY_START)
-				exit(1);
-		}
-	}
 
 	bool selection_changed = true;
 

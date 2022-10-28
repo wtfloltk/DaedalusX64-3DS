@@ -25,18 +25,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <new>
 
 #include <3ds.h>
-
+#include "Core/RomSettings.h"
 #include "Config/ConfigOptions.h"
 #include "Debug/DBGConsole.h"
 #include "HLEAudio/AudioBuffer.h"
 #include "Utility/FramerateLimiter.h"
 #include "Utility/Thread.h"
-
+#include "SysCTR/HLEAudio/AudioOutput.h"
+#include "Utility/Preferences.h"
 extern u32 gSoundSync;
 
 static const u32 DESIRED_OUTPUT_FREQUENCY = 44100;
 
-static const u32 CTR_BUFFER_SIZE  = 1024 * 2;
+
+static const u32 CTR_BUFFER_SIZE  = 1024 * 64;
 static const u32 CTR_BUFFER_COUNT = 6;
 static const u32 CTR_NUM_SAMPLES  = 512;
 
@@ -49,7 +51,7 @@ bool audioOpen = false;
 static AudioOutput * ac;
 
 CAudioBuffer *mAudioBuffer;
-
+static float audFreak = 44100;
 static void audioCallback(void *arg)
 {
 	(void)arg;
@@ -72,6 +74,8 @@ static void audioCallback(void *arg)
 
 static void AudioInit()
 {
+    audFreak = 44100;
+
 	if (ndspInit() != 0)
 		return;
 
@@ -139,8 +143,10 @@ void AudioOutput::AddBuffer( u8 *start, u32 length )
 		StartAudio();
 
 	u32 num_samples = length / sizeof( Sample );
+    u32 output_freq = 44100;
 
-	u32 output_freq = DESIRED_OUTPUT_FREQUENCY;
+    output_freq = (100000*(SRomPreferences().Clock/ 44100));
+
 
 	/*if (gAudioRateMatch)
 	{
