@@ -1,5 +1,7 @@
 before building go into main.cpp (where evere needed) change PglInitEX(value, value2) to PglInit()
 
+also needs from masterfeizz newest imgui and pica-imgui or imgui-pica whatever its called
+make install after a git clone and cd'ing into their folders
 
 # DaedalusX64
  
