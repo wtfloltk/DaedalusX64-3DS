@@ -3,6 +3,8 @@ before building go into main.cpp (where evere needed) change PglInitEX(value, va
 also needs from masterfeizz newest imgui and pica-imgui or imgui-pica whatever its called
 make install after a git clone and cd'ing into their folders
 
+https://github.com/masterfeizz?tab=repositories
+
 # DaedalusX64
  
 DaedalusX64 is a Nintendo 64 emulator for 3DS, Linux, PSP, PS Vita among other platforms. The PSP port is noteworthy for being the fastest N64 emulator ever on the platform, achieving close to or even full speed in many titles.
