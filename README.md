@@ -1,3 +1,6 @@
+before building go into main.cpp (where evere needed) change PglInitEX(value, value2) to PglInit()
+
+
 # DaedalusX64
  
 DaedalusX64 is a Nintendo 64 emulator for 3DS, Linux, PSP, PS Vita among other platforms. The PSP port is noteworthy for being the fastest N64 emulator ever on the platform, achieving close to or even full speed in many titles.
